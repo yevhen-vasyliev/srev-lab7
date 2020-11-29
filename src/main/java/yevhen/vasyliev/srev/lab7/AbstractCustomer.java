@@ -12,6 +12,7 @@ public abstract class AbstractCustomer {
         this.account = account;
         this.customerType = customerType;
     }
+
     public abstract double getOverdraftDiscount();
 
     public String getName() {
