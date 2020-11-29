@@ -8,9 +8,7 @@ public class Account {
 
     private int daysOverdrawn;
 
-    private double money;
-
-    private String currency;
+    private Money money;
 
     private AbstractCustomer customer;
 
@@ -48,7 +46,7 @@ public class Account {
 
     public String printAccount() {
         return "Account: IBAN: " + getIban() + ", Money: "
-                + getMoney() + ", Account type: " + getType();
+                + getMoney().getValue() + ", Account type: " + getType();
     }
 
     public String printDaysOverdrawnDescription() {
@@ -56,7 +54,7 @@ public class Account {
     }
 
     public String printMoneyDescription() {
-        return "Account: IBAN: " + getIban() + ", Money: " + getMoney();
+        return "Account: IBAN: " + getIban() + ", Money: " + getMoney().getValue();
     }
 
     public int getDaysOverdrawn() {
@@ -71,12 +69,12 @@ public class Account {
         this.iban = iban;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public Money getMoney() {
+        return money;
     }
 
-    public double getMoney() {
-        return money;
+    public void setMoney(Money money) {
+        this.money = money;
     }
 
     public AbstractCustomer getCustomer() {
@@ -93,13 +91,5 @@ public class Account {
 
     public String printCustomer() {
         return customer.getName() + " " + customer.getEmail();
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 }
