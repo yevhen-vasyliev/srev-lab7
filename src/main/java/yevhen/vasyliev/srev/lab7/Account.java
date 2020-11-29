@@ -1,20 +1,15 @@
 package yevhen.vasyliev.srev.lab7;
 
 public class Account {
-
     private String iban;
-
-    private AccountType type;
-
     private int daysOverdrawn;
-
     private Money money;
-
     private AbstractCustomer customer;
+    private boolean premium;
 
-    public Account(AccountType type, int daysOverdrawn) {
+    public Account(boolean premium, int daysOverdrawn) {
         super();
-        this.type = type;
+        this.premium = premium;
         this.daysOverdrawn = daysOverdrawn;
     }
 
@@ -27,7 +22,7 @@ public class Account {
     }
 
     private double overdraftCharge() {
-        if (type.isPremium()) {
+        if (premium) {
             double result = 10;
             if (getDaysOverdrawn() > 7)
                 result += (getDaysOverdrawn() - 7) * 1.0;
@@ -37,7 +32,7 @@ public class Account {
     }
 
     public double overdraftFee() {
-        if (type.isPremium()) {
+        if (premium) {
             return 0.10;
         } else {
             return 0.20;
@@ -55,6 +50,10 @@ public class Account {
 
     public String printMoneyDescription() {
         return "Account: IBAN: " + getIban() + ", Money: " + getMoney().getValue();
+    }
+
+    public String getType() {
+        return premium ? "premium" : "normal";
     }
 
     public int getDaysOverdrawn() {
@@ -85,8 +84,12 @@ public class Account {
         this.customer = customer;
     }
 
-    public AccountType getType() {
-        return type;
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
     }
 
     public String printCustomer() {
